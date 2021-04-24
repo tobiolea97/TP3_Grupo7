@@ -9,7 +9,7 @@ public class DniInvalidoException extends Exception  {
 	public String getMessage() {
 		
 		
-		return "Dni invalido";
+		return "El Dni Ingresado no debe contener letras. (SOLO NUMEROS)";
 	}
 
 	

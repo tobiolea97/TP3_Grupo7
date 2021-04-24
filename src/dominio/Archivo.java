@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Archivo {
 	private String ruta;
@@ -36,6 +37,10 @@ public class Archivo {
 			
 	}
 	
+	public void EliminarArchivo() {
+		File archivo = new File(ruta); 
+		archivo.delete();
+	}
 
 	public void EscribirCaractaresIndividuales(String frase) 
 	{
@@ -87,15 +92,26 @@ public class Archivo {
 		}
 	}
 	
-	public void LeerLineas() {
+	public ArrayList<Persona> LeerLineas() {
+		ArrayList<Persona> lista = new ArrayList<Persona>();
 		FileReader entrada;
 		try {
 			entrada = new FileReader(ruta);
 			BufferedReader miBuffer = new BufferedReader(entrada);
 			
 		   String linea = "";
+
 			while (linea != null) {
-				System.out.println(linea);
+				if(linea != "") {
+					
+					Persona objPersona = new Persona();
+					objPersona.setNombre(linea.split("-")[0]);
+					objPersona.setApellido(linea.split("-")[1]);
+					objPersona.setDni(linea.split("-")[2]);
+					
+					lista.add(objPersona);
+				}
+				//System.out.println(linea);
 				linea = miBuffer.readLine();
 			}
 			miBuffer.close();
@@ -104,6 +120,11 @@ public class Archivo {
 		} catch (IOException e) {
 			System.out.println("No se encontro el archivo");
 		}
+		catch(Exception e){
+			System.out.println("Excepcion no contemplada");
+		}
+		
+		return lista;
 	}
 
 	public String getRuta() {

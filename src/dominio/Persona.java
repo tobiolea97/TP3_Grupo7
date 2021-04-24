@@ -1,9 +1,14 @@
 package dominio;
 
-public class Persona {
+public class Persona implements Comparable<Persona>{
 	private String Nombre;
 	private String Apellido;
 	private String Dni;
+	
+	
+	public Persona() {
+		
+	}
 	
 	public Persona(String nombre, String apellido, String dni) {
 		super();
@@ -34,5 +39,20 @@ public class Persona {
 
 	public void setDni(String dni) {
 		Dni = dni;
+	}
+
+	@Override
+	public int compareTo(Persona o) {
+		
+		int resultado;
+		
+		resultado = this.Apellido.compareTo(o.getApellido());
+		
+		return resultado;
+	}
+
+	@Override
+	public String toString() {
+		return  Nombre + "-" + Apellido + "-" + Dni;
 	}
 }
